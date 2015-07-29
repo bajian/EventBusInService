@@ -20,12 +20,13 @@ public class MainActivity2 extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
-        EventBus.getDefault().register(this);//这里也注册，使得12activity同时收到消息
+        EventBus.getDefault().register(this);//杩欓噷涔熸敞鍐岋紝浣垮緱12activity鍚屾椂鏀跺埌娑堟伅
         intent = new Intent(MainActivity2.this,ExampleService.class);
     }
     public void send(View view){
         EventBus.getDefault().post(new Event1("FirstEvent btn clicked"));
         EventBus.getDefault().post(new Event2(1, 2));
+        EventBus.getDefault().post(new Event3(1, 2, 3, 1));
     }
     public void service(View view){
         startService(intent);

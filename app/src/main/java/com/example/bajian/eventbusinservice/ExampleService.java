@@ -25,7 +25,8 @@ public class ExampleService extends Service {
     public int onStartCommand(Intent intent, int flags, int startId) {
         //执行文件的下载或者播放等操作
         Log.i(TAG, "ExampleService-onStartCommand");
-        EventBus.getDefault().post(new Event3(1,2,3,1));
+        EventBus.getDefault().register(this);
+        EventBus.getDefault().post(new Event3(1, 2, 3, 1));
         /*
          * 这里返回状态有三个值，分别是:
          * 1、START_STICKY：当服务进程在运行时被杀死，系统将会把它置为started状态，但是不保存其传递的Intent对象，之后，系统会尝试重新创建服务;
@@ -36,6 +37,9 @@ public class ExampleService extends Service {
         return super.onStartCommand(intent, flags, startId);
     }
 
+    public void onEvent(Event3 event){
+        Log.d("service","event.getServiceState()"+event.getServiceState());
+    }
     @Override
     public IBinder onBind(Intent intent) {
         Log.i(TAG, "ExampleService-onBind");
